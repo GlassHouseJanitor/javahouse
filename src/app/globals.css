@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;700&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+    font-family: 'Cal Sans', sans-serif;
+    background-color: #2b2b2b;
+    color: #e2e8f0;
+    scroll-behavior: smooth;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    position: relative;
+}
+
+@keyframes floatAnimation {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Keyframes for logo light-up effect - Quad flash */
+@keyframes logoLightUpEffect {
+    0% { /* Start from non-hovered state */
+        opacity: 0.15;
+        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7))
+                drop-shadow(0 0 6px rgba(255, 255, 255, 0.5))
+                drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    }
+    /* Flash 1 */
+    12.5% {
+        opacity: 1;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1))
+                drop-shadow(0 0 15px rgba(255, 255, 255, 0.8))
+                drop-shadow(0 0 25px rgba(255, 255, 255, 0.6));
+    }
+    25% { /* Off 1 */
+        opacity: 0.4;
+        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7))
+                drop-shadow(0 0 6px rgba(255, 255, 255, 0.5));
+    }
+    /* Flash 2 */
+    37.5% {
+        opacity: 1;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1))
+                drop-shadow(0 0 15px rgba(255, 255, 255, 0.8))
+                drop-shadow(0 0 25px rgba(255, 255, 255, 0.6));
+    }
+    50% { /* Off 2 */
+        opacity: 0.4;
+        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7))
+                drop-shadow(0 0 6px rgba(255, 255, 255, 0.5));
+    }
+    /* Flash 3 */
+    62.5% {
+        opacity: 1;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1))
+                drop-shadow(0 0 15px rgba(255, 255, 255, 0.8))
+                drop-shadow(0 0 25px rgba(255, 255, 255, 0.6));
+    }
+    75% { /* Off 3 */
+        opacity: 0.4;
+        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7))
+                drop-shadow(0 0 6px rgba(255, 255, 255, 0.5));
+    }
+    /* Flash 4 */
+    87.5% {
+        opacity: 1;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1))
+                drop-shadow(0 0 15px rgba(255, 255, 255, 0.8))
+                drop-shadow(0 0 25px rgba(255, 255, 255, 0.6));
+    }
+    100% { /* Final sustained hover glow */
+        opacity: 1;
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.9))
+                drop-shadow(0 0 10px rgba(255, 255, 255, 0.7))
+                drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+    }
+}
+
+/* Keyframes for hero image flash effect - Quad flash */
+@keyframes heroImageFlashEffect {
+    0% { opacity: 0; }
+    /* Flash 1 */
+    12.5% { opacity: 0.3; }
+    25% { opacity: 0; }
+    /* Flash 2 */
+    37.5% { opacity: 0.3; }
+    50% { opacity: 0; }
+    /* Flash 3 */
+    62.5% { opacity: 0.3; }
+    75% { opacity: 0; }
+    /* Flash 4 */
+    87.5% { opacity: 0.3; }
+    100% { opacity: 0.25; } /* Sustained brighter image */
+}
+
+.page-logo {
+  position: absolute;
+  height: auto;
+  opacity: 0.15;
+  z-index: 20;
+  filter:
+    drop-shadow(0 0 3px rgba(255, 255, 255, 0.7))
+    drop-shadow(0 0 6px rgba(255, 255, 255, 0.5))
+    drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+
+  /* mobile defaults */
+  top: 34px;
+  left: 40%;
+  width: 80px;
+  transform: translateX(-50%);
+  animation: floatAnimation 3s ease-in-out infinite;
+}
+
+/* desktop & up: override only the properties that change */
+@media (min-width: 1024px) {
+  .page-logo {
+    top: 70px;
+    left: 100px;
+    width: 120px;
+    transform: none; /* kill the translateX(-50%) centering */
+  }
+}
+
+
+
+.page-logo:hover {
+    animation: logoLightUpEffect .2s ease-out forwards, floatAnimation 3s ease-in-out infinite;
+    opacity: 1;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.9))
+            drop-shadow(0 0 10px rgba(255, 255, 255, 0.7))
+            drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+}
+
+.hero-gradient {
+    position: relative;
+    background: linear-gradient(135deg, rgba(50, 50, 50, .65) 0%, rgba(64, 64, 64, .65) 100%),
+                url('/9L5BFZ4 - Imgur.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-gradient::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/EXGq4qX - Imgur.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    z-index: 1;
+}
+
+.hero-gradient.hero-image-brighten::before {
+    animation: heroImageFlashEffect .2s ease-out forwards;
+}
+
+.hero-gradient > div {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-accent {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
+                0 2px 4px -1px rgba(40, 40, 40, 0.1),
+                0 0 12px 3px rgba(200, 200, 220, 0.25);
+}
+
+.btn-accent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 30px -3px rgba(74, 74, 74, 0.3),
+                0 4px 6px -2px rgba(39, 39, 39, 0.1),
+                0 0 18px 5px rgba(220, 220, 255, 0.35);
+}
+
+.treatment-card {
+    transition: all 0.3s ease;
+    border: 0px solid #4c4c4c;
+    box-shadow: 0 0 15px 2px rgba(198, 198, 198, 0.2);
+}
+
+.treatment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+                0 0 20px 4px rgba(230, 230, 250, 0.3);
+}
+
+.insurance-card {
+    background: linear-gradient(-20deg, #3d3d3d, #1c1c1c);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3),
+                0 0 15px 2px rgba(0, 0, 0, 0.15);
+}
+
+.glass-effect {
+    background: rgba(41, 41, 41, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 0 15px 2px rgba(230, 230, 250, 0.1);
+}
+
+.stat-number {
+}
+
+.fas, .fab {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.icon-circle {
+    box-shadow: 0 0 10px 2px rgba(230, 230, 250, 0.3);
+}
+
+ul.list-disc.list-inside li {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.custom-indent li {
+    text-indent: -0rem; /* pulls first line back */
+    padding-left: 0rem; /* indents wrapped lines */
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-repeat: repeat-y;
+    background-size: 100% auto;
+    background-position: top left;
+    opacity: 0.1;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.font-redhat-display-light {
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 300;
+}
+.text-redhat-display {
+     font-family: 'Red Hat Display', sans-serif;
+     font-weight: 300;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.gh-thankyou-active {
+  transition: all 0.5s ease;
+  height: auto !important;
+}
